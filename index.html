@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gourmet Delights - Restaurant Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f4e9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #8b0000, #a52a2a);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-bottom: 4px solid #5a0000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2.8rem;
+            color: #ffd700;
+        }
+
+        .logo h1 {
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .tagline {
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: #5a0000;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: #ffd700;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: #ffc400;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-btn.active {
+            background: #ff6b00;
+            color: white;
+        }
+
+        .menu-intro {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .menu-intro h2 {
+            font-size: 2.2rem;
+            color: #8b0000;
+            margin-bottom: 15px;
+        }
+
+        .menu-intro p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .item-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .item-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .item-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #8b0000;
+        }
+
+        .item-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ff6b00;
+        }
+
+        .item-description {
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .item-category {
+            display: inline-block;
+            background: #ffd700;
+            color: #5a0000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ffd700;
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+
+            .logo h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-btn {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <h1>Gourmet Delights</h1>
+            </div>
+            <p class="tagline">Exquisite cuisine crafted with passion</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container nav-container">
+            <button class="nav-btn active" data-category="all">All Menu</button>
+            <button class="nav-btn" data-category="appetizers">Appetizers</button>
+            <button class="nav-btn" data-category="main-courses">Main Courses</button>
+            <button class="nav-btn" data-category="desserts">Desserts</button>
+            <button class="nav-btn" data-category="drinks">Drinks</button>
+        </div>
+    </nav>
+
+    <section class="menu-intro">
+        <h2>Our Culinary Masterpieces</h2>
+        <p>Each dish is carefully prepared with the freshest ingredients and presented with artistic flair. Explore our menu and discover flavors that will delight your senses.</p>
+    </section>
+
+    <main class="container">
+        <div class="menu-grid" id="menu-grid">
+            <!-- Menu items will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2023 Gourmet Delights Restaurant. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>123 Culinary Avenue, Foodie City | (555) 123-4567</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu data
+        const menuItems = [
+            {
+                id: 1,
+                title: "Truffle Arancini",
+                description: "Crispy risotto balls with black truffle and melted mozzarella, served with truffle aioli.",
+                price: 14.99,
+                category: "appetizers",
+                image: "appetizer1"
+            },
+            {
+                id: 2,
+                title: "Seared Scallops",
+                description: "Perfectly seared scallops on a bed of cauliflower puree with crispy pancetta and microgreens.",
+                price: 16.99,
+                category: "appetizers",
+                image: "appetizer2"
+            },
+            {
+                id: 3,
+                title: "Filet Mignon",
+                description: "8oz premium beef tenderloin with truffle mashed potatoes, grilled asparagus, and red wine reduction.",
+                price: 32.99,
+                category: "main-courses",
+                image: "main1"
+            },
+            {
+                id: 4,
+                title: "Pan-Seared Salmon",
+                description: "Atlantic salmon with lemon-dill sauce, quinoa pilaf, and roasted seasonal vegetables.",
+                price: 26.99,
+                category: "main-courses",
+                image: "main2"
+            },
+            {
+                id: 5,
+                title: "Wild Mushroom Risotto",
+                description: "Creamy arborio rice with assorted wild mushrooms, white wine, and parmesan cheese.",
+                price: 22.99,
+                category: "main-courses",
+                image: "main3"
+            },
+            {
+                id: 6,
+                title: "Chocolate Soufflé",
+                description: "Warm chocolate soufflé with a molten center, served with vanilla bean ice cream.",
+                price: 12.99,
+                category: "desserts",
+                image: "dessert1"
+            },
+            {
+                id: 7,
+                title: "Crème Brûlée",
+                description: "Classic vanilla bean custard with a caramelized sugar crust and fresh berries.",
+                price: 10.99,
+                category: "desserts",
+                image: "dessert2"
+            },
+            {
+                id: 8,
+                title: "Artisanal Cheese Plate",
+                description: "Selection of fine cheeses with honeycomb, fig jam, and toasted bread.",
+                price: 15.99,
+                category: "appetizers",
+                image: "appetizer3"
+            },
+            {
+                id: 9,
+                title: "Craft Cocktails",
+                description: "Seasonal selection of handcrafted cocktails made with premium spirits and fresh ingredients.",
+                price: 13.99,
+                category: "drinks",
+                image: "drink1"
+            },
+            {
+                id: 10,
+                title: "Tiramisu",
+                description: "Traditional Italian dessert with espresso-soaked ladyfingers and mascarpone cream.",
+                price: 11.99,
+                category: "desserts",
+                image: "dessert3"
+            },
+            {
+                id: 11,
+                title: "Wine Selection",
+                description: "Curated selection of red, white, and sparkling wines from renowned vineyards.",
+                price: 12.99,
+                category: "drinks",
+                image: "drink2"
+            },
+            {
+                id: 12,
+                title: "Herb-Crusted Lamb Chops",
+                description: "New Zealand lamb chops with rosemary crust, mint sauce, and roasted root vegetables.",
+                price: 34.99,
+                category: "main-courses",
+                image: "main4"
+            }
+        ];
+
+        // DOM elements
+        const menuGrid = document.getElementById('menu-grid');
+        const navButtons = document.querySelectorAll('.nav-btn');
+
+        // Function to generate random background color for image placeholders
+        function getRandomColor() {
+            const colors = [
+                'linear-gradient(135deg, #ff9a9e, #fad0c4)',
+                'linear-gradient(135deg, #a1c4fd, #c2e9fb)',
+                'linear-gradient(135deg, #ffecd2, #fcb69f)',
+                'linear-gradient(135deg, #84fab0, #8fd3f4)',
+                'linear-gradient(135deg, #d4fc79, #96e6a1)',
+                'linear-gradient(135deg, #a6c0fe, #f68084)'
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Function to render menu items
+        function renderMenuItems(items) {
+            menuGrid.innerHTML = '';
+
+            items.forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'menu-item';
+
+                // Generate placeholder with random gradient
+                const randomGradient = getRandomColor();
+
+                menuItem.innerHTML = `
+                    <div class="item-image" style="background: ${randomGradient};"></div>
+                    <div class="item-content">
+                        <div class="item-header">
+                            <h3 class="item-title">${item.title}</h3>
+                            <div class="item-price">$${item.price.toFixed(2)}</div>
+                        </div>
+                        <p class="item-description">${item.description}</p>
+                        <span class="item-category">${item.category.replace('-', ' ')}</span>
+                    </div>
+                `;
+
+                menuGrid.appendChild(menuItem);
+            });
+        }
+
+        // Function to filter menu items by category
+        function filterMenu(category) {
+            if (category === 'all') {
+                renderMenuItems(menuItems);
+            } else {
+                const filteredItems = menuItems.filter(item => item.category === category);
+                renderMenuItems(filteredItems);
+            }
+        }
+
+        // Event listeners for nav buttons
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                navButtons.forEach(btn => btn.classList.remove('active'));
+
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                // Filter menu
+                const category = button.getAttribute('data-category');
+                filterMenu(category);
+            });
+        });
+
+        // Initialize the page with all menu items
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenuItems(menuItems);
+        });
+    </script>
+</body>
+</html>
